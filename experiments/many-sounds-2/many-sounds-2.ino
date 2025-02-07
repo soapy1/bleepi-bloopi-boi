@@ -57,7 +57,7 @@ Bounce btnDrum2 = Bounce(2, 15);  // 15 = 15 ms debounce time
 Bounce btnSlot1 = Bounce(22, 15); 
 Bounce btnSlot2 = Bounce(17, 15); 
 Bounce btnSlot3 = Bounce(16, 15); 
-Bounce btnSlot4 = Bounce(14, 15); 
+Bounce btnSlot4 = Bounce(14, 15);
 
 // Use these with the Teensy Audio Shield
 #define SDCARD_CS_PIN    10
@@ -66,8 +66,21 @@ Bounce btnSlot4 = Bounce(14, 15);
 
 #define LED_PIN    5
 
+const int numReadings = 5;
+int readings[numReadings];  // the readings from the analog input
+int readIndex = 0;          // the index of the current reading
+int total = 0;              // the running total
+int average = 0;            // the average
+int radioKnobPin = A8;
+int radioKnob = 0;
+
 void setup() {
   Serial.begin(9600);
+  
+  for (int thisReading = 0; thisReading < numReadings; thisReading++) {
+    readings[thisReading] = 0;
+  }
+
   AudioMemory(8);
   sgtl5000_1.enable();
   sgtl5000_1.volume(0.5);
@@ -82,7 +95,7 @@ void setup() {
   pinMode(LED_PIN, OUTPUT);
   pinMode(0, INPUT_PULLUP);
   pinMode(2, INPUT_PULLUP);
-  pinMode(22, INPUT_PULLUP);
+  pinMode(3, INPUT_PULLUP);
   pinMode(17, INPUT_PULLUP);
   pinMode(16, INPUT_PULLUP);
   pinMode(14, INPUT_PULLUP);
@@ -101,6 +114,16 @@ int voice3Playing = 0;
 int voice4Playing = 0;
 
 void loop() {
+  total = total - readings[readIndex];
+  readings[readIndex] = analogRead(radioKnobPin);
+  total = total + readings[readIndex];
+  readIndex = readIndex + 1;
+  if (readIndex >= numReadings) {
+    readIndex = 0;
+  }
+  radioKnob = total / numReadings;
+
+  radioKnob = map(radioKnob, 0, 1023, 0, 3);
   
   // blink the LED without delays
   if (blinkTime < 250) {
