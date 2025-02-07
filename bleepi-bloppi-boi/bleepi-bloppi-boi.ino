@@ -113,6 +113,14 @@ int voice2Playing = 0;
 int voice3Playing = 0;
 int voice4Playing = 0;
 
+char *drum1sound = "drum1.wav";
+char *drum2sound = "drum2.wav";
+char *slot1sound = "slot1.wav";
+char *slot2sound = "slot2.wav";
+char *slot3sound = "slot3.wav";
+char *slot4sound = "slot4.wav";
+
+
 void loop() {
   total = total - readings[readIndex];
   readings[readIndex] = analogRead(radioKnobPin);
@@ -138,13 +146,13 @@ void loop() {
   if (btnDrum1.fallingEdge()) {
     if (voice0Playing == 0) {
       voice0Playing = 1;
-      voice0file = "drum1.wav";
+      voice0file = drum1sound;
     } else {
-      if (voice0file == "drum1.wav") {
+      if (voice0file == drum1sound) {
         voice0Playing = 0;
         voices[0]->stop();
       } else {
-        voice0file = "drum1.wav";
+        voice0file = drum1sound;
         voices[0]->stop();
         voices[0]->play(voice0file);
       }
@@ -155,13 +163,13 @@ void loop() {
   if (btnDrum2.fallingEdge()) {
      if (voice0Playing == 0) {
       voice0Playing = 1;
-      voice0file = "drum2.wav";
+      voice0file = drum2sound;
     } else {
-      if (voice0file == "drum2.wav") {
+      if (voice0file == drum2sound) {
         voice0Playing = 0;
         voices[0]->stop();
       } else {
-        voice0file = "drum2.wav";
+        voice0file = drum2sound;
         voices[0]->stop();
         voices[0]->play(voice0file);
       }
@@ -216,25 +224,25 @@ void loop() {
 
   if (voice1Playing == 1) {
     if (voices[1]->isPlaying() == false) {
-      voices[1]->play("slot1.wav");
+      voices[1]->play(slot1sound);
     }
   }
 
   if (voice2Playing == 1) {
     if (voices[2]->isPlaying() == false) {
-      voices[2]->play("slot2.wav");
+      voices[2]->play(slot2sound);
     }
   }
 
   if (voice3Playing == 1) {
     if (voices[3]->isPlaying() == false) {
-      voices[3]->play("slot3.wav");
+      voices[3]->play(slot3sound);
     }
   }
 
   if (voice4Playing == 1) {
     if (voices[4]->isPlaying() == false) {
-      voices[4]->play("slot4.wav");
+      voices[4]->play(slot4sound);
     }
   }
 }
