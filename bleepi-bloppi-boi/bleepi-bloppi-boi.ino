@@ -113,12 +113,20 @@ int voice2Playing = 0;
 int voice3Playing = 0;
 int voice4Playing = 0;
 
-char *drum1sound = "drum1.wav";
-char *drum2sound = "drum2.wav";
-char *slot1sound = "slot1.wav";
-char *slot2sound = "slot2.wav";
-char *slot3sound = "slot3.wav";
-char *slot4sound = "slot4.wav";
+const char * drum1 = "drum1.wav";
+const char * drum2 = "drum2.wav";
+const char * slot1 = "slot1.wav";
+const char * slot2 = "slot2.wav";
+const char * slot3 = "slot3.wav";
+const char * slot4 = "slot4.wav";
+
+
+char *drum1sound = drum1;
+char *drum2sound = drum2;
+char *slot1sound = slot1;
+char *slot2sound = slot2;
+char *slot3sound = slot3;
+char *slot4sound = slot4;
 
 
 void loop() {
@@ -132,6 +140,36 @@ void loop() {
   radioKnob = total / numReadings;
 
   radioKnob = map(radioKnob, 0, 1023, 0, 3);
+
+  if (radioKnob == 0) {
+    drum1sound = slot3;
+    drum2sound = slot3;
+    slot1sound = slot3;
+    slot2sound = slot3;
+    slot3sound = slot3;
+    slot4sound = slot3;
+  } else if (radioKnob == 1) {
+    drum1sound = drum2;
+    drum2sound = drum2;
+    slot1sound = drum2;
+    slot2sound = drum2;
+    slot3sound = drum2;
+    slot4sound = drum2;
+  } else if (radioKnob == 2) {
+    drum1sound = slot4;
+    drum2sound = slot4;
+    slot1sound = slot4;
+    slot2sound = slot4;
+    slot3sound = slot4;
+    slot4sound = slot4;
+  } else {
+    drum1sound = slot1;
+    drum2sound = slot1;
+    slot1sound = slot1;
+    slot2sound = slot1;
+    slot3sound = slot1;
+    slot4sound = slot1;
+  }
   
   // blink the LED without delays
   if (blinkTime < 250) {
