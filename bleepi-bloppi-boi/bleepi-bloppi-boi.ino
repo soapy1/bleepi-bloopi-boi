@@ -10,6 +10,7 @@
 #include <SD.h>
 #include <SerialFlash.h>
 #include <Bounce.h>
+#include "AudioFiles.h"
 
 // GUItool: begin automatically generated code
 AudioPlaySdWav           playSdWav2;     //xy=99,267
@@ -106,27 +107,19 @@ void setup() {
 elapsedMillis blinkTime;
 
 int voice0Playing = 0;
-char *voice0file = "drum0.wav";
+const char* voice0file = AudioFiles.drum0;
 
 int voice1Playing = 0;
 int voice2Playing = 0;
 int voice3Playing = 0;
 int voice4Playing = 0;
 
-const char * drum1 = "drum1.wav";
-const char * drum2 = "drum2.wav";
-const char * slot1 = "slot1.wav";
-const char * slot2 = "slot2.wav";
-const char * slot3 = "slot3.wav";
-const char * slot4 = "slot4.wav";
-
-
-char *drum1sound = drum1;
-char *drum2sound = drum2;
-char *slot1sound = slot1;
-char *slot2sound = slot2;
-char *slot3sound = slot3;
-char *slot4sound = slot4;
+const char* drum1sound = AudioFiles.drum1;
+const char* drum2sound = AudioFiles.drum2;
+const char* slot1sound = AudioFiles.slot1;
+const char* slot2sound = AudioFiles.slot2;
+const char* slot3sound = AudioFiles.slot3;
+const char* slot4sound = AudioFiles.slot4;
 
 
 void loop() {
@@ -142,33 +135,33 @@ void loop() {
   radioKnob = map(radioKnob, 0, 1023, 0, 3);
 
   if (radioKnob == 0) {
-    drum1sound = slot3;
-    drum2sound = slot3;
-    slot1sound = slot3;
-    slot2sound = slot3;
-    slot3sound = slot3;
-    slot4sound = slot3;
+    drum1sound = AudioFiles.slot3;
+    drum2sound = AudioFiles.slot3;
+    slot1sound = AudioFiles.slot3;
+    slot2sound = AudioFiles.slot3;
+    slot3sound = AudioFiles.slot3;
+    slot4sound = AudioFiles.slot3;
   } else if (radioKnob == 1) {
-    drum1sound = drum2;
-    drum2sound = drum2;
-    slot1sound = drum2;
-    slot2sound = drum2;
-    slot3sound = drum2;
-    slot4sound = drum2;
+    drum1sound = AudioFiles.drum2;
+    drum2sound = AudioFiles.drum2;
+    slot1sound = AudioFiles.drum2;
+    slot2sound = AudioFiles.drum2;
+    slot3sound = AudioFiles.drum2;
+    slot4sound = AudioFiles.drum2;
   } else if (radioKnob == 2) {
-    drum1sound = slot4;
-    drum2sound = slot4;
-    slot1sound = slot4;
-    slot2sound = slot4;
-    slot3sound = slot4;
-    slot4sound = slot4;
+    drum1sound = AudioFiles.slot4;
+    drum2sound = AudioFiles.slot4;
+    slot1sound = AudioFiles.slot4;
+    slot2sound = AudioFiles.slot4;
+    slot3sound = AudioFiles.slot4;
+    slot4sound = AudioFiles.slot4;
   } else {
-    drum1sound = slot1;
-    drum2sound = slot1;
-    slot1sound = slot1;
-    slot2sound = slot1;
-    slot3sound = slot1;
-    slot4sound = slot1;
+    drum1sound = AudioFiles.slot1;
+    drum2sound = AudioFiles.slot1;
+    slot1sound = AudioFiles.slot1;
+    slot2sound = AudioFiles.slot1;
+    slot3sound = AudioFiles.slot1;
+    slot4sound = AudioFiles.slot1;
   }
   
   // blink the LED without delays
